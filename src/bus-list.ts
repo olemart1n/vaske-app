@@ -5,6 +5,12 @@ interface Bus {
   brand: string;
   slug: string;
   length: 12 | 18 | 24;
+  status: Status;
+}
+
+interface Status {
+  isWashed: boolean;
+  isInTraffic: boolean;
 }
 
 const busList: Bus[] = [];
@@ -29,6 +35,11 @@ for (let index = 8701; index <= 8714; index++) {
     engine: "Diesel",
     slug: slugs[2],
     length: 24,
+    status: {
+      isWashed: Math.random() < 0.5,
+
+      isInTraffic: Math.random() < 0.5,
+    },
   });
 }
 
@@ -40,6 +51,11 @@ for (let index = 8720; index <= 8745; index++) {
     engine: "El",
     slug: slugs[0],
     length: 12,
+    status: {
+      isWashed: Math.random() < 0.5,
+
+      isInTraffic: Math.random() < 0.5,
+    },
   });
 }
 // MAN El 1
@@ -50,6 +66,11 @@ for (let index = 8746; index <= 8749; index++) {
     engine: "El",
     slug: slugs[1],
     length: 12,
+    status: {
+      isWashed: Math.random() < 0.5,
+
+      isInTraffic: Math.random() < 0.5,
+    },
   });
 }
 
@@ -61,6 +82,11 @@ for (let index = 8750; index <= 8755; index++) {
     engine: "Diesel",
     slug: slugs[8],
     length: 12,
+    status: {
+      isWashed: Math.random() < 0.5,
+
+      isInTraffic: Math.random() < 0.5,
+    },
   });
 }
 
@@ -72,6 +98,11 @@ for (let index = 8756; index <= 8757; index++) {
     engine: "Diesel",
     slug: slugs[9],
     length: 12,
+    status: {
+      isWashed: Math.random() < 0.5,
+
+      isInTraffic: Math.random() < 0.5,
+    },
   });
 }
 
@@ -83,6 +114,11 @@ for (let index = 8760; index <= 8770; index++) {
     engine: "Diesel",
     slug: slugs[7],
     length: 18,
+    status: {
+      isWashed: Math.random() < 0.5,
+
+      isInTraffic: Math.random() < 0.5,
+    },
   });
 }
 // Man El Ledd
@@ -93,6 +129,11 @@ for (let index = 8771; index <= 8779; index++) {
     engine: "Diesel",
     slug: slugs[6],
     length: 18,
+    status: {
+      isWashed: Math.random() < 0.5,
+
+      isInTraffic: Math.random() < 0.5,
+    },
   });
 }
 // 12M MAN
@@ -103,6 +144,11 @@ for (let index = 8780; index <= 8799; index++) {
     engine: "Gass",
     slug: slugs[5],
     length: 12,
+    status: {
+      isWashed: Math.random() < 0.5,
+
+      isInTraffic: Math.random() < 0.5,
+    },
   });
 }
 // 12M MAN
@@ -114,6 +160,11 @@ for (let index = 8801; index <= 8819; index++) {
     engine: "Gass",
     slug: slugs[5],
     length: 12,
+    status: {
+      isWashed: Math.random() < 0.5,
+
+      isInTraffic: Math.random() < 0.5,
+    },
   });
 }
 // MAN gass-ledd
@@ -124,6 +175,11 @@ for (let index = 8825; index <= 8841; index++) {
     engine: "Gass",
     slug: slugs[4],
     length: 18,
+    status: {
+      isWashed: Math.random() < 0.5,
+
+      isInTraffic: Math.random() < 0.5,
+    },
   });
 }
 // Volvo Diesel-ledd
@@ -134,6 +190,11 @@ for (let index = 8845; index <= 8874; index++) {
     engine: "Diesel",
     slug: slugs[3],
     length: 18,
+    status: {
+      isWashed: Math.random() < 0.5,
+
+      isInTraffic: Math.random() < 0.5,
+    },
   });
 }
 export { busList, type Bus };

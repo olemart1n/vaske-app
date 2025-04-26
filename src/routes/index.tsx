@@ -1,12 +1,19 @@
 import { component$, useContext } from "@builder.io/qwik";
 import { busContext } from "~/context";
 import type { DocumentHead } from "@builder.io/qwik-city";
+import { Badge, Button } from "~/components/ui";
 export default component$(() => {
   const context = useContext(busContext);
   return (
     <>
       {context.filtered.map((buss, i) => (
-        <div class="my-1 flex w-full rounded border-1" key={i}>
+        <div
+          class={
+            "my-1 flex w-full gap-1 rounded border-1 " +
+            (buss.status.isWashed && "bg-green-300")
+          }
+          key={i}
+        >
           <img
             src={
               buss.length === 12
@@ -25,6 +32,15 @@ export default component$(() => {
               {buss.brand}
               <span> {buss.engine}</span>
             </p>
+          </div>
+          <div class="ml-auto flex flex-col justify-center gap-1">
+            {buss.status.isInTraffic && <Badge>I trafikk</Badge>}
+
+            {!buss.status.isWashed && !buss.status.isInTraffic && (
+              <Button class="h-0: ountline-none mx-2 h-fit rounded-sm bg-green-300 p-1">
+                Start vask
+              </Button>
+            )}
           </div>
         </div>
       ))}

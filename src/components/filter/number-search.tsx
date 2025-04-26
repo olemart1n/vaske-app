@@ -23,24 +23,26 @@ export const NumberSearch = component$(
         isFilter.value = false;
         busNumber.value = "8";
       } else {
-        context.filtered = [];
-        busNumber.value = "8";
+        busNumber.value = " - - -";
+        setTimeout(() => {
+          busNumber.value = "8";
+        }, 200);
       }
     });
     return (
-      <>
+      <div class="rounded-sm p-1 outline outline-slate-800">
         <input
           type="text"
           name="bus-number"
           bind:value={busNumber}
-          class="m-auto mt-2 rounded border-none bg-black px-3 text-2xl placeholder:px-2 placeholder:font-medium placeholder:text-slate-600"
+          class="m-auto mt-2 w-20 rounded border-none bg-black px-3 text-2xl placeholder:px-2 placeholder:font-medium placeholder:text-slate-600"
         />
-        <div>
+        <div class="m-auto mt-2 flex w-fit flex-col gap-1">
           {Array.from({ length: 10 }, (_, index) =>
             NumberButton(index, busNumber),
           )}
         </div>
-      </>
+      </div>
     );
   },
 );
@@ -51,7 +53,7 @@ const NumberButton = (index: number, number: Signal<string>) => {
       onClick$={() => {
         number.value = number.value + index;
       }}
-      class="touch-manipulation bg-slate-400 p-2 text-3xl font-bold active:bg-slate-600"
+      class="w-8 touch-manipulation rounded bg-black text-2xl outline outline-slate-800 active:bg-slate-600"
     >
       {index}
     </button>

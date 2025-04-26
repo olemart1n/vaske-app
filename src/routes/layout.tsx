@@ -5,7 +5,7 @@ import {
   useStore,
   useContextProvider,
 } from "@builder.io/qwik";
-import type { RequestHandler } from "@builder.io/qwik-city";
+import { Link, useLocation, type RequestHandler } from "@builder.io/qwik-city";
 import { Filter } from "~/components/filter";
 import { Button } from "~/components/ui";
 import { busList as list } from "~/bus-list";
@@ -22,15 +22,38 @@ export const onGet: RequestHandler = async ({ cacheControl }) => {
 };
 
 export default component$(() => {
+  const loc = useLocation();
+  console.log(loc.url.pathname);
   const busList = useStore({ all: list, filtered: list });
   useContextProvider(busContext, busList);
   const isFilter = useSignal(false);
 
   return (
     <>
-      <header class="fixed flex w-full flex-col bg-white p-1">
+      <header class="fixed flex w-full bg-white p-1">
+        <Link
+          href="/"
+          class={
+            "my-auto h-fit text-sm " + (loc.url.pathname === "/" && "underline")
+          }
+        >
+          Vaskeliste
+        </Link>
+        <span class="mx-2 text-xl text-slate-200">|</span>
+        <Link
+          href="/pågående-vasker"
+          class={
+            "my-auto h-fit text-sm " +
+            (loc.url.pathname === "/p%C3%A5g%C3%A5ende-vasker/" && "underline")
+          }
+        >
+          Pågående vasker
+        </Link>
+
         <Button
-          class="ms-auto border"
+          class={
+            "aniamte-wiggle ms-auto " + (isFilter.value ? "border-2" : "border")
+          }
           size="sm"
           onClick$={() => {
             isFilter.value = !isFilter.value;
@@ -38,11 +61,11 @@ export default component$(() => {
         >
           Filter
         </Button>
-        {/* {isFilter.value && <Filter isFilter={isFilter} />} */}
+
         <Filter isFilter={isFilter} />
       </header>
 
-      <main class="bg-slate-100 p-1">
+      <main class="bg-slate-100 p-3">
         <div class="h-8"></div>
         <Slot />
       </main>
