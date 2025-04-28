@@ -4,6 +4,7 @@ import {
   useSignal,
   useStore,
   useContextProvider,
+  useContext,
 } from "@builder.io/qwik";
 import { Link, useLocation, type RequestHandler } from "@builder.io/qwik-city";
 import { Filter } from "~/components/filter";
@@ -26,19 +27,20 @@ export default component$(() => {
   console.log(loc.url.pathname);
   const busList = useStore({ all: list, filtered: list });
   useContextProvider(busContext, busList);
+  const context = useContext(busContext, busList);
   const isFilter = useSignal(false);
 
   return (
     <>
       <header class="fixed flex w-full bg-white p-1">
-        <Link
+        <a
           href="/"
           class={
             "my-auto h-fit text-sm " + (loc.url.pathname === "/" && "underline")
           }
         >
           Vaskeliste
-        </Link>
+        </a>
         <span class="mx-2 text-xl text-slate-200">|</span>
         <Link
           href="/pågående-vasker"
@@ -51,11 +53,10 @@ export default component$(() => {
         </Link>
 
         <Button
-          class={
-            "aniamte-wiggle ms-auto " + (isFilter.value ? "border-2" : "border")
-          }
+          class={"ms-auto " + (isFilter.value ? "border-2" : "border")}
           size="sm"
           onClick$={() => {
+            context.filtered = [];
             isFilter.value = !isFilter.value;
           }}
         >

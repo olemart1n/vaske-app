@@ -24,10 +24,19 @@ export default component$(() => {
             }
             width={70}
             height={70}
+            class="aspect-square object-contain"
             alt={buss.length.toString() + " buss"}
           />
           <div>
-            <p class="text-l">{buss.number}</p>
+            <div class="flex items-center">
+              <p class="text-l">{buss.number}</p>
+              {buss.status.isWashed && (
+                <p class="mx-1 rounded-sm bg-slate-300 px-1 text-xs font-thin">
+                  Vasket av <span class="italic">[bruker]</span>
+                </p>
+              )}
+            </div>
+
             <p class="font-thin">
               {buss.brand}
               <span> {buss.engine}</span>
