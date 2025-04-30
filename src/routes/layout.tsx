@@ -1,14 +1,11 @@
 import {
   component$,
   Slot,
-  useSignal,
   useStore,
   useContextProvider,
-  useContext,
 } from "@builder.io/qwik";
 import { Link, useLocation, type RequestHandler } from "@builder.io/qwik-city";
-import { Filter } from "~/components/filter";
-import { Button } from "~/components/ui";
+
 import { busList as list } from "~/bus-list";
 import { busContext } from "~/context";
 export const onGet: RequestHandler = async ({ cacheControl }) => {
@@ -24,20 +21,15 @@ export const onGet: RequestHandler = async ({ cacheControl }) => {
 
 export default component$(() => {
   const loc = useLocation();
-  console.log(loc.url.pathname);
-  const busList = useStore({ all: list, filtered: list });
-  useContextProvider(busContext, busList);
-  const context = useContext(busContext, busList);
-  const isFilter = useSignal(false);
+  const filteredStore = useStore({ filtered: list });
+  useContextProvider(busContext, filteredStore);
 
   return (
     <>
       <header class="fixed flex w-full bg-white p-1">
         <a
           href="/"
-          class={
-            "my-auto h-fit text-sm " + (loc.url.pathname === "/" && "underline")
-          }
+          class={"my-auto h-fit " + (loc.url.pathname === "/" && "underline")}
         >
           Vaskeliste
         </a>
@@ -45,25 +37,22 @@ export default component$(() => {
         <Link
           href="/pågående-vasker"
           class={
-            "my-auto h-fit text-sm " +
+            "my-auto h-fit " +
             (loc.url.pathname === "/p%C3%A5g%C3%A5ende-vasker/" && "underline")
           }
         >
           Pågående vasker
         </Link>
 
-        <Button
-          class={"ms-auto " + (isFilter.value ? "border-2" : "border")}
-          size="sm"
-          onClick$={() => {
-            context.filtered = [];
-            isFilter.value = !isFilter.value;
-          }}
+        <Link
+          class={
+            "ms-auto flex items-center rounded border-none px-2 " +
+            (loc.url.pathname.includes("filter") ? "outline-2" : "outline-1")
+          }
+          href="/filter"
         >
           Filter
-        </Button>
-
-        <Filter isFilter={isFilter} />
+        </Link>
       </header>
 
       <main class="bg-slate-100 p-3">

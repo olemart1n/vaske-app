@@ -3,7 +3,7 @@ import { component$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
 export default component$(() => {
   //   const context = useContext(busContext);
-  return <>Siden for pågående vaskerr</>;
+  return <>Siden for pågående vasker. Ikke utviklet</>;
 });
 
 export const head: DocumentHead = {

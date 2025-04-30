@@ -38,7 +38,7 @@ for (let index = 8701; index <= 8714; index++) {
     status: {
       isWashed: Math.random() < 0.5,
 
-      isInTraffic: Math.random() < 0.5,
+      isInTraffic: Math.random() < 0.1,
     },
   });
 }
